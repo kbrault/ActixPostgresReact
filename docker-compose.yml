@@ -1,0 +1,28 @@
+services:
+  backend:
+    build: ./backend
+    container_name: ActixPostgresReact-Backend
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    networks:
+      - backend
+  postgres:
+    image: postgres:latest
+    container_name: ActixPostgresReact-DB
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=database
+    networks:
+      - backend
+volumes:
+  db:
+networks:
+  backend:
+    driver: bridge
