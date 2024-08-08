@@ -6,9 +6,9 @@ Rust (Actix), PostgreSQL, React stack boilerplate
 *Work in progress*
 
 # Usage 
+Modifier .env file and launch : 
 ```
 docker-compose up --build --no-cache -d
 ```
-
 # Todo
-- Tests
+- Add a init.sql file instead of /backend/src/db.src::initialize_db

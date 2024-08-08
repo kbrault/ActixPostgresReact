@@ -16,6 +16,8 @@ services:
       - ${BACKEND_NETWORK}
       - ${FRONTEND_NETWORK}
       - ${TRAEFIK_NETWORK}
+    env_file: 
+      - ./.env  # Specify the path to the root .env file
 
   postgres:
     image: ${POSTGRES_IMAGE}
