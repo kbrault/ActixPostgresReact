@@ -5,6 +5,18 @@ services:
     ports:
       - "8080:8080"
     restart: on-failure
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.actix.rule=Host(`127.0.0.1`)"
+      - "traefik.http.routers.actix.entrypoints=web"
+      - "traefik.http.services.actix.loadbalancer.server.port=8080"
+    depends_on:
+      - postgres
+    networks:
+      - backend-network
+      - frontend-network
+      - traefik-network
+
   postgres:
     image: postgres:latest
     container_name: ActixPostgresReact-DB
@@ -17,11 +29,50 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=user
       - POSTGRES_DB=database
+    networks:
+      - backend-network
+
   frontend:
     build: ./frontend
     container_name: ActixPostgresReact-Frontend
     ports:
       - "80:80"
     restart: on-failure
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`127.0.0.1`)"
+      - "traefik.http.routers.frontend.entrypoints=web"
+      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
+    networks:
+      - frontend-network
+      - traefik-network
+
+  traefik:
+    image: traefik:v3.1.2
+    container_name: ActixPostgresReact-Traefik
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:8082"
+      - "--entrypoints.traefik.address=:8081"
+    ports:
+      - "8082:8082"   
+      - "8081:8081"
+    networks:
+      - backend-network
+      - frontend-network
+      - traefik-network
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    restart: always
+
 volumes:
   db:
+
+networks:
+  backend-network:
+    driver: bridge
+  frontend-network:
+    driver: bridge
+  traefik-network:
+    driver: bridge

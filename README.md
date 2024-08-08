@@ -3,11 +3,12 @@
 # ActixPostgresReact
 Rust (Actix), PostgreSQL, React stack boilerplate
 
-Work in progress
+*Work in progress*
 
+# Usage 
 ```
 docker-compose up --build --no-cache -d
 ```
 
-Todo :
-- Traefik
+# Todo
+- Tests
