@@ -6,7 +6,7 @@ Rust (Actix), PostgreSQL, React stack boilerplate
 *Work in progress*
 
 # Usage 
-Modifier .env file and launch : 
+Modify .env file and launch : 
 ```
 docker-compose up --build --no-cache -d
 ```
