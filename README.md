@@ -12,4 +12,3 @@ docker-compose up --build --no-cache -d
 
 # Todo
 - Tests
-- Export all variable/constant into a single configuration file 
