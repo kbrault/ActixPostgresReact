@@ -3,8 +3,6 @@ use crate::db::initialize_db;
 use actix_web::{HttpResponse, Responder};
 //use bcrypt::{hash, verify, DEFAULT_COST};
 use serde_json::json;
-use std::time::Duration;
-use tokio::time::sleep;
 use tokio_postgres::NoTls;
 
 /*
@@ -48,23 +46,20 @@ pub async fn get_data() -> impl Responder {
 
     initialize_db(&client).await.unwrap();
 
-    sleep(Duration::from_secs(1)).await;
-
-    // Query the database
     let rows = client
-        .query("SELECT name, age, email FROM users", &[])
+        .query("SELECT name, role, email FROM users", &[])
         .await
         .unwrap();
 
     let mut data = Vec::new();
     for row in rows {
         let name: &str = row.get(0);
-        let age: i32 = row.get(1);
+        let role: &str = row.get(1);
         let email: &str = row.get(2);
 
         let row_data = json!({
             "name": name,
-            "age": age,
+            "role": role,
             "email": email
         });
 
