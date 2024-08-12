@@ -1,6 +1,8 @@
-FROM rust:latest
+FROM rust:1.80-slim-bookworm
 WORKDIR /app
-COPY . .
+COPY Cargo.toml Cargo.lock ./
+COPY src ./src
+COPY .env ./
 RUN apt-get update && apt-get install -y \
     libssl-dev \
     pkg-config

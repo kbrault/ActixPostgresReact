@@ -5,7 +5,7 @@ use actix_web::{HttpResponse, Responder};
 use serde_json::json;
 use std::time::Duration;
 use tokio::time::sleep;
-use tokio_postgres::{Client, NoTls};
+use tokio_postgres::NoTls;
 
 /*
 fn hash_password(password: &str) -> Result<String, bcrypt::BcryptError> {
@@ -42,7 +42,7 @@ pub async fn get_data() -> impl Responder {
 
     tokio::spawn(async move {
         if let Err(e) = connection.await {
-            eprintln!("connection error: {}", e);
+            eprintln!("Connection error: {}", e);
         }
     });
 
