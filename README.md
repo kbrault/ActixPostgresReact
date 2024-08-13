@@ -3,12 +3,10 @@
 # ActixPostgresReact
 Rust (Actix), PostgreSQL, React stack boilerplate
 
-*Work in progress*
+*Work in progress. Not production ready, at all !*
 
 # Usage 
 Modify .env file and launch : 
 ```
 docker-compose up --build --no-cache -d
 ```
-# Todo
-- Add a init.sql file instead of /backend/src/db.src::initialize_db
