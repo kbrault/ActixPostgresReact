@@ -12,7 +12,6 @@ pub enum InitError {
     IoError(#[from] io::Error),
 }
 
-/// Initializes the database, creating the users table if it does not exist.
 pub async fn initialize_db(client: &Client) -> Result<(), InitError> {
     let table_exists: Option<Option<String>> = client
         .query("SELECT to_regclass('public.users')::text", &[])
@@ -23,17 +22,14 @@ pub async fn initialize_db(client: &Client) -> Result<(), InitError> {
         .unwrap_or(None);
 
     if table_exists.is_none() {
-        // Read the SQL file
         let sql = read_sql_file("src/init.sql").await?;
 
-        // Execute the SQL statements
         client.batch_execute(&sql).await?;
     }
 
     Ok(())
 }
 
-/// Reads the SQL file asynchronously and returns the content as a String.
 async fn read_sql_file(path: &str) -> Result<String, io::Error> {
     let mut file = File::open(path).await?;
     let mut contents = String::new();

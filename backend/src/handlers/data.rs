@@ -1,37 +1,8 @@
 use crate::config;
 use crate::db::initialize_db;
 use actix_web::{HttpResponse, Responder};
-//use bcrypt::{hash, verify, DEFAULT_COST};
 use serde_json::json;
 use tokio_postgres::NoTls;
-
-/*
-fn hash_password(password: &str) -> Result<String, bcrypt::BcryptError> {
-    hash(password, DEFAULT_COST)
-}
-
-fn verify_password(password: &str, hash: &str) -> Result<bool, bcrypt::BcryptError> {
-    verify(password, hash)
-}
-
-async fn check_password(client: &Client, email: &str, password: &str) -> Result<bool, String> {
-    // Query to get the hashed password for the given email
-    let row = client
-        .query_opt("SELECT password FROM users WHERE email = $1", &[&email])
-        .await
-        .map_err(|e| e.to_string())?;
-
-    if let Some(row) = row {
-        let stored_hash: &str = row.get(0);
-
-        // Verify the provided password against the stored hash
-        verify_password(password, stored_hash).map_err(|e| e.to_string())
-    } else {
-        // No user found with the given email
-        Ok(false)
-    }
-}
-    */
 
 pub async fn get_data() -> impl Responder {
     let conn_str = config::get_database_url();

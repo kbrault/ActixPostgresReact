@@ -12,3 +12,5 @@ tokio-postgres = "0.7.2"
 tokio = { version = "1.39.2", features = ["full"] }
 thiserror = "1.0.63"
 bcrypt = "0.15.1"
+jsonwebtoken = "9.3.0"
+serde = "1.0.207"

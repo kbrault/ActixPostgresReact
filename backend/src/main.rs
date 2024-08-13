@@ -13,7 +13,8 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .wrap(Cors::permissive())
-            .route("/data", web::get().to(handlers::get_data))
+            .route("/data", web::get().to(handlers::data::get_data))
+            .route("/login", web::post().to(handlers::auth::login))
     })
     .bind("0.0.0.0:8080")?
     .run()
