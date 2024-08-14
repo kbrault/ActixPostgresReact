@@ -1,9 +1,8 @@
 [![dependency status](https://deps.rs/repo/github/kbrault/ActixPostgresReact/status.svg?path=backend)](https://deps.rs/repo/github/kbrault/ActixPostgresReact?path=backend)
 
 # ActixPostgresReact
-Rust (Actix), PostgreSQL, React stack boilerplate
-
-*Work in progress. Not production ready, at all !*
+Rust (Actix), PostgreSQL, React stack boilerplate attempt.
+Not finished, not active anymore.
 
 # Usage 
 Modify .env file and launch : 
